@@ -1,14 +1,47 @@
-const ResumeOrganizer = ({ data, setData, setCurrentView }) => {
-  const [activeSection, setActiveSection] = React.useState('personalInfo');
+import { useState } from 'react';
 
-  const sections = [
+interface PersonalInfo {
+  name: string;
+  email: string;
+  phoneNumber: string;
+}
+
+interface Experience {
+  company: string;
+  role: string;
+  duration: string;
+}
+
+interface ResumeData {
+  personalInfo: PersonalInfo;
+  experience: Experience[];
+  skills: string[];
+  achievements: string[];
+}
+
+interface Section {
+  id: 'personalInfo' | 'experience' | 'skills' | 'achievements';
+  label: string;
+  icon: string;
+}
+
+interface ResumeOrganizerProps {
+  data: ResumeData;
+  setData: React.Dispatch<React.SetStateAction<ResumeData>>;
+  setCurrentView: (view: string) => void;
+}
+
+const ResumeOrganizer: React.FC<ResumeOrganizerProps> = ({ data, setData, setCurrentView }) => {
+  const [activeSection, setActiveSection] = useState<Section['id']>('personalInfo');
+
+  const sections: Section[] = [
     { id: 'personalInfo', label: 'Personal Info', icon: '👤' },
     { id: 'experience', label: 'Experience', icon: '💼' },
     { id: 'skills', label: 'Skills', icon: '🎯' },
     { id: 'achievements', label: 'Achievements', icon: '🏆' }
   ];
 
-  const handleInputChange = (field, value) => {
+  const handleInputChange = (field: keyof PersonalInfo, value: string) => {
     setData(prev => ({
       ...prev,
       personalInfo: {
@@ -25,7 +58,7 @@ const ResumeOrganizer = ({ data, setData, setCurrentView }) => {
     }));
   };
 
-  const addItem = (section, value) => {
+  const addItem = (section: 'skills' | 'achievements', value: string) => {
     if (value && !data[section].includes(value)) {
       setData(prev => ({
         ...prev,
@@ -110,10 +143,10 @@ const ResumeOrganizer = ({ data, setData, setCurrentView }) => {
               <input
                 type="text"
                 placeholder={`Add new ${activeSection === 'skills' ? 'skill' : 'achievement'}`}
-                onKeyPress={(e) => {
+                onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) => {
                   if (e.key === 'Enter') {
-                    addItem(activeSection, e.target.value);
-                    e.target.value = '';
+                    addItem(activeSection, (e.target as HTMLInputElement).value);
+                    (e.target as HTMLInputElement).value = '';
                   }
                 }}
                 className="w-full p-2 border rounded"
@@ -125,3 +158,5 @@ const ResumeOrganizer = ({ data, setData, setCurrentView }) => {
     </div>
   );
 };
+
+export default ResumeOrganizer;
