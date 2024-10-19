@@ -1,4 +1,30 @@
-const ResumePreview = ({ data, setCurrentView }) => {
+import React from 'react';
+
+interface PersonalInfo {
+  name: string;
+  email: string;
+  phoneNumber: string;
+}
+
+interface Experience {
+  company: string;
+  role: string;
+  duration: string;
+}
+
+interface Data {
+  personalInfo: PersonalInfo;
+  experience: Experience[];
+  skills: string[];
+  achievements: string[];
+}
+
+interface ResumePreviewProps {
+  data: Data;
+  setCurrentView: (view: string) => void;
+}
+
+const ResumePreview: React.FC<ResumePreviewProps> = ({ data, setCurrentView }) => {
   return (
     <div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
       {/* Personal Info */}
@@ -51,3 +77,5 @@ const ResumePreview = ({ data, setCurrentView }) => {
     </div>
   );
 };
+
+export default ResumePreview;
