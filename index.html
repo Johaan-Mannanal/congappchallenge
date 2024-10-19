@@ -4,32 +4,74 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Resume Builder</title>
-  
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- React -->
   <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-  
-  <!-- TypeScript -->
-  <script src="https://unpkg.com/typescript@4.9.5/lib/typescript.js"></script>
-  
-  <!-- Babel -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  
-  <script type="text/babel" data-plugins="transform-typescript">
-    import { ResumeBuilder } from './ResumeBuilder.tsx';
-    
-    ReactDOM.render(
-      <React.StrictMode>
-        <ResumeBuilder />
-      </React.StrictMode>,
-      document.getElementById('root')
-    );
-  </script>
 </head>
 <body class="bg-gray-100">
   <div id="root"></div>
+
+  <script type="text/babel">
+    // Simple state management to switch between components
+    const App = () => {
+      const [currentView, setCurrentView] = React.useState('organizer');
+      const [data, setData] = React.useState({
+        personalInfo: { name: '', email: '', phoneNumber: '' },
+        experience: [],
+        skills: [],
+        achievements: []
+      });
+
+      const renderComponent = () => {
+        switch(currentView) {
+          case 'organizer':
+            return <ResumeOrganizer data={data} setData={setData} setCurrentView={setCurrentView} />;
+          case 'preview':
+            return <ResumePreview data={data} setCurrentView={setCurrentView} />;
+          case 'template':
+            return <ResumeTemplateSelection setCurrentView={setCurrentView} />;
+          default:
+            return <ResumeOrganizer data={data} setData={setData} setCurrentView={setCurrentView} />;
+        }
+      };
+
+      return (
+        <div className="min-h-screen bg-gray-100">
+          <nav className="bg-white shadow-sm mb-8">
+            <div className="max-w-7xl mx-auto px-4 py-4">
+              <div className="flex justify-between items-center">
+                <h1 className="text-xl font-bold">📝 Resume Builder</h1>
+                <div className="flex gap-4">
+                  <button onClick={() => setCurrentView('organizer')} 
+                    className={`px-4 py-2 rounded ${currentView === 'organizer' ? 'bg-blue-100 text-blue-600' : ''}`}>
+                    ✏️ Editor
+                  </button>
+                  <button onClick={() => setCurrentView('preview')}
+                    className={`px-4 py-2 rounded ${currentView === 'preview' ? 'bg-blue-100 text-blue-600' : ''}`}>
+                    👀 Preview
+                  </button>
+                  <button onClick={() => setCurrentView('template')}
+                    className={`px-4 py-2 rounded ${currentView === 'template' ? 'bg-blue-100 text-blue-600' : ''}`}>
+                    🎨 Templates
+                  </button>
+                </div>
+              </div>
+            </div>
+          </nav>
+          <main className="max-w-7xl mx-auto px-4">
+            {renderComponent()}
+          </main>
+        </div>
+      );
+    };
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+
+  <!-- Import the components -->
+  <script type="text/babel" src="./ResumeOrganizer.js"></script>
+  <script type="text/babel" src="./ResumePreview.js"></script>
+  <script type="text/babel" src="./ResumeTemplateSelection.js"></script>
 </body>
 </html>
