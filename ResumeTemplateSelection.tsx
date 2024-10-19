@@ -1,5 +1,17 @@
-const ResumeTemplateSelection = ({ setCurrentView }) => {
-  const templates = [
+import React from 'react';
+
+interface Template {
+  id: string;
+  name: string;
+  icon: string;
+}
+
+interface ResumeTemplateSelectionProps {
+  setCurrentView: (view: string) => void;
+}
+
+const ResumeTemplateSelection: React.FC<ResumeTemplateSelectionProps> = ({ setCurrentView }) => {
+  const templates: Template[] = [
     { id: 'modern', name: 'Modern', icon: '🎨' },
     { id: 'classic', name: 'Classic', icon: '📄' },
     { id: 'minimal', name: 'Minimal', icon: '✨' }
@@ -10,7 +22,7 @@ const ResumeTemplateSelection = ({ setCurrentView }) => {
       <h1 className="text-3xl font-bold mb-8">Choose Your Template</h1>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {templates.map(template => (
+        {templates.map((template) => (
           <div
             key={template.id}
             className="border rounded-lg p-6 hover:border-blue-500 cursor-pointer transition-colors"
@@ -25,3 +37,5 @@ const ResumeTemplateSelection = ({ setCurrentView }) => {
     </div>
   );
 };
+
+export default ResumeTemplateSelection;
