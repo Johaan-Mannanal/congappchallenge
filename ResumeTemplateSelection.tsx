@@ -1,5 +1,9 @@
 import React from 'react';
 
+interface Props {
+  setCurrentView: (view: string) => void;
+}
+
 const templates = [
   { name: 'Modern', image: '/api/placeholder/300/200' },
   { name: 'Creative', image: '/api/placeholder/300/200' },
@@ -9,9 +13,9 @@ const templates = [
   { name: 'Bold', image: '/api/placeholder/300/200' },
 ];
 
-const TemplateCard = ({ name, image }) => (
+const TemplateCard: React.FC<{ name: string; image: string }> = ({ name, image }) => (
   <div className="bg-white rounded-xl shadow-md overflow-hidden">
-    <img src={image} alt={${name} template} className="w-full h-48 object-cover" />
+    <img src={image} alt={`${name} template`} className="w-full h-48 object-cover" />
     <div className="p-4">
       <h3 className="font-semibold text-lg mb-2">{name}</h3>
       <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
@@ -21,7 +25,7 @@ const TemplateCard = ({ name, image }) => (
   </div>
 );
 
-const ResumeTemplateSelection = () => {
+const ResumeTemplateSelection: React.FC<Props> = ({ setCurrentView }) => {
   return (
     <div className="min-h-screen bg-gray-100">
       <header className="bg-white shadow">
@@ -37,6 +41,11 @@ const ResumeTemplateSelection = () => {
               <TemplateCard key={template.name} {...template} />
             ))}
           </div>
+        </div>
+        <div className="flex justify-center mt-8">
+          <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors" onClick={() => setCurrentView('preview')}>
+            Preview Selected Template
+          </button>
         </div>
       </main>
     </div>
