@@ -3,120 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Resume Organizer</title>
-  <!-- Include Tailwind CSS via CDN for styling -->
+  <title>Resume Builder</title>
+  
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Include React and ReactDOM via CDN -->
+  
+  <!-- React -->
   <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-  <!-- Include Babel for JSX transformation -->
-  <script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
+  
+  <!-- TypeScript -->
+  <script src="https://unpkg.com/typescript@4.9.5/lib/typescript.js"></script>
+  
+  <!-- Babel -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <script type="text/babel" data-plugins="transform-typescript">
+    import { ResumeBuilder } from './ResumeBuilder.tsx';
+    
+    ReactDOM.render(
+      <React.StrictMode>
+        <ResumeBuilder />
+      </React.StrictMode>,
+      document.getElementById('root')
+    );
+  </script>
 </head>
 <body class="bg-gray-100">
   <div id="root"></div>
-  
-  <script type="text/babel">
-    const { useState } = React;
-
-    const ResumeOrganizer = ({ data }) => {
-      const [activeSection, setActiveSection] = useState('personalInfo');
-
-      const sections = [
-        { id: 'personalInfo', label: 'Personal Info' },
-        { id: 'experience', label: 'Experience' },
-        { id: 'skills', label: 'Skills' },
-        { id: 'achievements', label: 'Achievements' },
-      ];
-
-      return (
-        <div className="flex h-screen">
-          {/* Sidebar */}
-          <div className="w-72 bg-white shadow-lg p-6">
-            <h2 className="text-2xl font-bold mb-8 text-blue-600">Resume Creation</h2>
-            <nav className="space-y-1">
-              {sections.map((section) => (
-                <button
-                  key={section.id}
-                  onClick={() => setActiveSection(section.id)}
-                  className={`flex items-center w-full p-3 rounded-lg transition-colors ${
-                    activeSection === section.id ? 'bg-blue-50 text-blue-600' : 'hover:bg-gray-50'
-                  }`}
-                >
-                  <span className="ml-3">{section.label}</span>
-                  {activeSection === section.id && <span className="ml-auto">▶️</span>}
-                </button>
-              ))}
-            </nav>
-          </div>
-
-          {/* Main Content */}
-          <div className="flex-1 p-10 overflow-auto">
-            <h1 className="text-3xl font-bold mb-8 text-gray-800">Resume Organizer</h1>
-            <div className="bg-white rounded-xl shadow-sm p-8">
-              {activeSection === 'personalInfo' && (
-                <div>
-                  <h2 className="text-xl font-bold">Personal Information</h2>
-                  <p>Name: {data.personalInfo.name}</p>
-                  <p>Email: {data.personalInfo.email}</p>
-                  <p>Phone: {data.personalInfo.phoneNumber}</p>
-                </div>
-              )}
-              {activeSection === 'experience' && (
-                <div>
-                  <h2 className="text-xl font-bold">Experience</h2>
-                  {data.experience.map((exp, index) => (
-                    <div key={index}>
-                      <p>Company: {exp.company}</p>
-                      <p>Role: {exp.role}</p>
-                      <p>Duration: {exp.duration}</p>
-                    </div>
-                  ))}
-                </div>
-              )}
-              {activeSection === 'skills' && (
-                <div>
-                  <h2 className="text-xl font-bold">Skills</h2>
-                  <ul>
-                    {data.skills.map((skill, index) => (
-                      <li key={index}>{skill}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-              {activeSection === 'achievements' && (
-                <div>
-                  <h2 className="text-xl font-bold">Achievements</h2>
-                  <ul>
-                    {data.achievements.map((achievement, index) => (
-                      <li key={index}>{achievement}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-            <button className="mt-8 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-              Proceed to Template Selection
-            </button>
-          </div>
-        </div>
-      );
-    };
-
-    const data = {
-      personalInfo: {
-        name: "John Doe",
-        email: "john.doe@example.com",
-        phoneNumber: "(123) 456-7890",
-      },
-      experience: [
-        { company: "Tech Corp", role: "Software Engineer", duration: "2020 - Present" },
-        { company: "Startup Inc.", role: "Developer", duration: "2018 - 2020" }
-      ],
-      skills: ["JavaScript", "React", "Node.js", "Python"],
-      achievements: ["Awarded Developer of the Year", "Lead a successful project launch"],
-    };
-
-    ReactDOM.render(<ResumeOrganizer data={data} />, document.getElementById('root'));
-  </script>
 </body>
 </html>
