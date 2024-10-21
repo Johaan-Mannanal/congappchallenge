@@ -9,7 +9,6 @@ const ResumePreview = ({ data, setCurrentView }) => {
         <p className="text-gray-600">{data.personalInfo.email}</p>
         <p className="text-gray-600">{data.personalInfo.phoneNumber}</p>
       </div>
-
       {/* Experience */}
       <div className="mb-8">
         <h2 className="text-2xl font-bold mb-4">Experience</h2>
@@ -21,7 +20,6 @@ const ResumePreview = ({ data, setCurrentView }) => {
           </div>
         ))}
       </div>
-
       {/* Skills */}
       <div className="mb-8">
         <h2 className="text-2xl font-bold mb-4">Skills</h2>
@@ -33,7 +31,6 @@ const ResumePreview = ({ data, setCurrentView }) => {
           ))}
         </div>
       </div>
-
       {/* Achievements */}
       <div className="mb-8">
         <h2 className="text-2xl font-bold mb-4">Achievements</h2>
@@ -43,7 +40,6 @@ const ResumePreview = ({ data, setCurrentView }) => {
           ))}
         </ul>
       </div>
-
       <button
         onClick={() => setCurrentView('template')}
         className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
