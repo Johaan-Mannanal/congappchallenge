@@ -1,12 +1,6 @@
 import React from 'react';
-import { ResumeData } from './App';
 
-interface ResumePreviewProps {
-  data: ResumeData;
-  setCurrentView: (view: 'organizer' | 'preview' | 'template') => void;
-}
-
-const ResumePreview: React.FC<ResumePreviewProps> = ({ data, setCurrentView }) => {
+const ResumePreview = ({ data, setCurrentView }) => {
   return (
     <div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
       {/* Personal Info */}
