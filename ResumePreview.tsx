@@ -1,27 +1,9 @@
 import React from 'react';
-
-interface PersonalInfo {
-  name: string;
-  email: string;
-  phoneNumber: string;
-}
-
-interface Experience {
-  company: string;
-  role: string;
-  duration: string;
-}
-
-interface Data {
-  personalInfo: PersonalInfo;
-  experience: Experience[];
-  skills: string[];
-  achievements: string[];
-}
+import { ResumeData } from './App';
 
 interface ResumePreviewProps {
-  data: Data;
-  setCurrentView: (view: string) => void;
+  data: ResumeData;
+  setCurrentView: (view: 'organizer' | 'preview' | 'template') => void;
 }
 
 const ResumePreview: React.FC<ResumePreviewProps> = ({ data, setCurrentView }) => {
