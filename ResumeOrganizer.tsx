@@ -1,45 +1,21 @@
-import { useState } from 'react';
-
-interface PersonalInfo {
-  name: string;
-  email: string;
-  phoneNumber: string;
-}
-
-interface Experience {
-  company: string;
-  role: string;
-  duration: string;
-}
-
-interface ResumeData {
-  personalInfo: PersonalInfo;
-  experience: Experience[];
-  skills: string[];
-  achievements: string[];
-}
-
-interface Section {
-  id: 'personalInfo' | 'experience' | 'skills' | 'achievements';
-  label: string;
-  icon: string;
-}
+import React, { useState } from 'react';
+import { ResumeData, PersonalInfo } from './App';
 
 interface ResumeOrganizerProps {
   data: ResumeData;
   setData: React.Dispatch<React.SetStateAction<ResumeData>>;
-  setCurrentView: (view: string) => void;
+  setCurrentView: (view: 'organizer' | 'preview' | 'template') => void;
 }
 
 const ResumeOrganizer: React.FC<ResumeOrganizerProps> = ({ data, setData, setCurrentView }) => {
-  const [activeSection, setActiveSection] = useState<Section['id']>('personalInfo');
+  const [activeSection, setActiveSection] = useState<'personalInfo' | 'experience' | 'skills' | 'achievements'>('personalInfo');
 
-  const sections: Section[] = [
+  const sections = [
     { id: 'personalInfo', label: 'Personal Info', icon: '👤' },
     { id: 'experience', label: 'Experience', icon: '💼' },
     { id: 'skills', label: 'Skills', icon: '🎯' },
     { id: 'achievements', label: 'Achievements', icon: '🏆' }
-  ];
+  ] as const;
 
   const handleInputChange = (field: keyof PersonalInfo, value: string) => {
     setData(prev => ({
