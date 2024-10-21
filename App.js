@@ -3,28 +3,9 @@ import ResumeOrganizer from './ResumeOrganizer';
 import ResumePreview from './ResumePreview';
 import ResumeTemplateSelection from './ResumeTemplateSelection';
 
-export interface PersonalInfo {
-  name: string;
-  email: string;
-  phoneNumber: string;
-}
-
-export interface Experience {
-  company: string;
-  role: string;
-  duration: string;
-}
-
-export interface ResumeData {
-  personalInfo: PersonalInfo;
-  experience: Experience[];
-  skills: string[];
-  achievements: string[];
-}
-
-const App: React.FC = () => {
-  const [currentView, setCurrentView] = useState<'organizer' | 'preview' | 'template'>('organizer');
-  const [data, setData] = useState<ResumeData>({
+const App = () => {
+  const [currentView, setCurrentView] = useState('organizer');
+  const [data, setData] = useState({
     personalInfo: { name: '', email: '', phoneNumber: '' },
     experience: [],
     skills: [],
