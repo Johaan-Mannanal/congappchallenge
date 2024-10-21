@@ -90,7 +90,39 @@ const ResumeOrganizer = ({ data, setData, setCurrentView }) => {
             <h2 className="text-xl font-bold">Experience</h2>
             {data.experience.map((exp, index) => (
               <div key={index} className="p-4 border rounded">
-                {/* Experience fields */}
+                <input
+                  type="text"
+                  placeholder="Company"
+                  value={exp.company}
+                  onChange={(e) => {
+                    const newExperience = [...data.experience];
+                    newExperience[index].company = e.target.value;
+                    setData(prev => ({ ...prev, experience: newExperience }));
+                  }}
+                  className="w-full p-2 border rounded mb-2"
+                />
+                <input
+                  type="text"
+                  placeholder="Role"
+                  value={exp.role}
+                  onChange={(e) => {
+                    const newExperience = [...data.experience];
+                    newExperience[index].role = e.target.value;
+                    setData(prev => ({ ...prev, experience: newExperience }));
+                  }}
+                  className="w-full p-2 border rounded mb-2"
+                />
+                <input
+                  type="text"
+                  placeholder="Duration"
+                  value={exp.duration}
+                  onChange={(e) => {
+                    const newExperience = [...data.experience];
+                    newExperience[index].duration = e.target.value;
+                    setData(prev => ({ ...prev, experience: newExperience }));
+                  }}
+                  className="w-full p-2 border rounded"
+                />
               </div>
             ))}
             <button
