@@ -7,7 +7,7 @@ interface Template {
 }
 
 interface ResumeTemplateSelectionProps {
-  setCurrentView: (view: string) => void;
+  setCurrentView: (view: 'organizer' | 'preview' | 'template') => void;
 }
 
 const ResumeTemplateSelection: React.FC<ResumeTemplateSelectionProps> = ({ setCurrentView }) => {
