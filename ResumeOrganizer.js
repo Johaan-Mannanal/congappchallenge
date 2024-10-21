@@ -1,23 +1,16 @@
 import React, { useState } from 'react';
-import { ResumeData, PersonalInfo } from './App';
 
-interface ResumeOrganizerProps {
-  data: ResumeData;
-  setData: React.Dispatch<React.SetStateAction<ResumeData>>;
-  setCurrentView: (view: 'organizer' | 'preview' | 'template') => void;
-}
-
-const ResumeOrganizer: React.FC<ResumeOrganizerProps> = ({ data, setData, setCurrentView }) => {
-  const [activeSection, setActiveSection] = useState<'personalInfo' | 'experience' | 'skills' | 'achievements'>('personalInfo');
+const ResumeOrganizer = ({ data, setData, setCurrentView }) => {
+  const [activeSection, setActiveSection] = useState('personalInfo');
 
   const sections = [
     { id: 'personalInfo', label: 'Personal Info', icon: '👤' },
     { id: 'experience', label: 'Experience', icon: '💼' },
     { id: 'skills', label: 'Skills', icon: '🎯' },
     { id: 'achievements', label: 'Achievements', icon: '🏆' }
-  ] as const;
+  ];
 
-  const handleInputChange = (field: keyof PersonalInfo, value: string) => {
+  const handleInputChange = (field, value) => {
     setData(prev => ({
       ...prev,
       personalInfo: {
@@ -34,7 +27,7 @@ const ResumeOrganizer: React.FC<ResumeOrganizerProps> = ({ data, setData, setCur
     }));
   };
 
-  const addItem = (section: 'skills' | 'achievements', value: string) => {
+  const addItem = (section, value) => {
     if (value && !data[section].includes(value)) {
       setData(prev => ({
         ...prev,
@@ -119,10 +112,10 @@ const ResumeOrganizer: React.FC<ResumeOrganizerProps> = ({ data, setData, setCur
               <input
                 type="text"
                 placeholder={`Add new ${activeSection === 'skills' ? 'skill' : 'achievement'}`}
-                onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                onKeyPress={(e) => {
                   if (e.key === 'Enter') {
-                    addItem(activeSection, (e.target as HTMLInputElement).value);
-                    (e.target as HTMLInputElement).value = '';
+                    addItem(activeSection, e.target.value);
+                    e.target.value = '';
                   }
                 }}
                 className="w-full p-2 border rounded"
