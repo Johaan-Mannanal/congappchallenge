@@ -1,17 +1,7 @@
 import React from 'react';
 
-interface Template {
-  id: string;
-  name: string;
-  icon: string;
-}
-
-interface ResumeTemplateSelectionProps {
-  setCurrentView: (view: 'organizer' | 'preview' | 'template') => void;
-}
-
-const ResumeTemplateSelection: React.FC<ResumeTemplateSelectionProps> = ({ setCurrentView }) => {
-  const templates: Template[] = [
+const ResumeTemplateSelection = ({ setCurrentView }) => {
+  const templates = [
     { id: 'modern', name: 'Modern', icon: '🎨' },
     { id: 'classic', name: 'Classic', icon: '📄' },
     { id: 'minimal', name: 'Minimal', icon: '✨' }
