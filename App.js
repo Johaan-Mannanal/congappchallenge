@@ -1,11 +1,6 @@
-import React, { useState } from 'react';
-import ResumeOrganizer from './ResumeOrganizer';
-import ResumePreview from './ResumePreview';
-import ResumeTemplateSelection from './ResumeTemplateSelection';
-
 const App = () => {
-  const [currentView, setCurrentView] = useState('organizer');
-  const [data, setData] = useState({
+  const [currentView, setCurrentView] = React.useState('organizer');
+  const [data, setData] = React.useState({
     personalInfo: { name: '', email: '', phoneNumber: '' },
     experience: [],
     skills: [],
@@ -54,11 +49,10 @@ const App = () => {
           </div>
         </div>
       </nav>
-      <main className="max-w-7xl mx-auto px-4">
-        {renderComponent()}
-      </main>
+      <main className="max-w-7xl mx-auto px-4">{renderComponent()}</main>
     </div>
   );
 };
 
-export default App;
+// Render the app
+ReactDOM.render(<App />, document.getElementById('root'));
