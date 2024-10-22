@@ -1,5 +1,30 @@
 import React, { useState } from 'react';
 
+interface PersonalInfo {
+  name: string;
+  email: string;
+  phoneNumber: string;
+}
+
+interface Experience {
+  company: string;
+  role: string;
+  duration: string;
+}
+
+interface Data {
+  personalInfo: PersonalInfo;
+  experience: Experience[];
+  skills: string[];
+  achievements: string[];
+}
+
+interface ResumeOrganizerProps {
+  data: Data;
+  setData: React.Dispatch<React.SetStateAction<Data>>;
+  setCurrentView: React.Dispatch<React.SetStateAction<string>>;
+}
+
 const ResumeOrganizer: React.FC<ResumeOrganizerProps> = ({ data, setData, setCurrentView }) => {
   const [activeSection, setActiveSection] = useState<string>('personalInfo');
 
@@ -20,25 +45,8 @@ const ResumeOrganizer: React.FC<ResumeOrganizerProps> = ({ data, setData, setCur
     }));
   };
 
-  const addExperience = () => {
-    setData((prev) => ({
-      ...prev,
-      experience: [...prev.experience, { company: '', role: '', duration: '' }],
-    }));
-  };
-
-  const addItem = (section: keyof Data, value: string) => {
-    if (value && !data[section].includes(value)) {
-      setData((prev) => ({
-        ...prev,
-        [section]: [...prev[section], value],
-      }));
-    }
-  };
-
   return (
     <div className="flex bg-white rounded-lg shadow-lg">
-      {/* Sidebar */}
       <div className="w-64 border-r border-gray-200 p-6">
         <nav className="space-y-2">
           {sections.map((section) => (
@@ -56,7 +64,6 @@ const ResumeOrganizer: React.FC<ResumeOrganizerProps> = ({ data, setData, setCur
         </nav>
       </div>
 
-      {/* Content Area */}
       <div className="flex-1 p-6">
         {activeSection === 'personalInfo' && (
           <div className="space-y-4">
@@ -82,77 +89,6 @@ const ResumeOrganizer: React.FC<ResumeOrganizerProps> = ({ data, setData, setCur
               onChange={(e) => handleInputChange('phoneNumber', e.target.value)}
               className="w-full p-2 border rounded"
             />
-          </div>
-        )}
-
-        {activeSection === 'experience' && (
-          <div className="space-y-4">
-            <h2 className="text-xl font-bold">Experience</h2>
-            {data.experience.map((exp, index) => (
-              <div key={index} className="p-4 border rounded">
-                <input
-                  type="text"
-                  placeholder="Company"
-                  value={exp.company}
-                  onChange={(e) => {
-                    const newExperience = [...data.experience];
-                    newExperience[index].company = e.target.value;
-                    setData((prev) => ({ ...prev, experience: newExperience }));
-                  }}
-                  className="w-full p-2 border rounded mb-2"
-                />
-                <input
-                  type="text"
-                  placeholder="Role"
-                  value={exp.role}
-                  onChange={(e) => {
-                    const newExperience = [...data.experience];
-                    newExperience[index].role = e.target.value;
-                    setData((prev) => ({ ...prev, experience: newExperience }));
-                  }}
-                  className="w-full p-2 border rounded mb-2"
-                />
-                <input
-                  type="text"
-                  placeholder="Duration"
-                  value={exp.duration}
-                  onChange={(e) => {
-                    const newExperience = [...data.experience];
-                    newExperience[index].duration = e.target.value;
-                    setData((prev) => ({ ...prev, experience: newExperience }));
-                  }}
-                  className="w-full p-2 border rounded"
-                />
-              </div>
-            ))}
-            <button
-              onClick={addExperience}
-              className="w-full p-2 border-2 border-dashed rounded hover:border-blue-500"
-            >
-              + Add Experience
-            </button>
-          </div>
-        )}
-
-        {(activeSection === 'skills' || activeSection === 'achievements') && (
-          <div className="space-y-4">
-            <h2 className="text-xl font-bold">{activeSection === 'skills' ? 'Skills' : 'Achievements'}</h2>
-            <div className="space-y-2">
-              {data[activeSection].map((item, index) => (
-                <div key={index} className="p-2 bg-gray-50 rounded">{item}</div>
-              ))}
-              <input
-                type="text"
-                placeholder={`Add new ${activeSection === 'skills' ? 'skill' : 'achievement'}`}
-                onKeyPress={(e) => {
-                  if (e.key === 'Enter') {
-                    addItem(activeSection, e.target.value);
-                    e.target.value = '';
-                  }
-                }}
-                className="w-full p-2 border rounded"
-              />
-            </div>
           </div>
         )}
       </div>
