@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import ResumeOrganizer from './components/ResumeOrganizer';
-import ResumePreview from './components/ResumePreview';
-import ResumeTemplateSelection from './components/ResumeTemplateSelection';
+import ResumeOrganizer from './ResumeOrganizer';
+import ResumePreview from './ResumePreview';
+import ResumeTemplateSelection from './ResumeTemplateSelection';
 
 const App = () => {
   const [currentView, setCurrentView] = useState('organizer');
