@@ -10,43 +10,48 @@
     <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
 
-    <!-- Babel CDN to transpile JSX/TSX in the browser -->
+    <!-- Babel to transpile JSX in the browser -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-    <!-- Add some basic styles for visibility -->
+    <!-- Add simple styles -->
     <style>
       body {
         font-family: Arial, sans-serif;
-        background-color: #f7fafc;
+        background-color: #f0f4f8;
         margin: 0;
         padding: 0;
+        box-sizing: border-box;
       }
       .container {
-        max-width: 960px;
-        margin: 20px auto;
+        width: 100%;
+        max-width: 900px;
+        margin: 50px auto;
         padding: 20px;
         background-color: white;
-        border-radius: 10px;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+      }
+      h1 {
+        color: #333;
       }
     </style>
   </head>
+
   <body>
-    <!-- React app will mount here -->
     <div id="root" class="container"></div>
 
-    <!-- React Application Logic -->
+    <!-- React Application -->
     <script type="text/babel">
       const { useState } = React;
 
-      const ResumeOrganizer = ({ data, setData, setCurrentView }) => {
+      const ResumeOrganizer = ({ data, setData }) => {
         const [activeSection, setActiveSection] = useState('personalInfo');
 
         const sections = [
           { id: 'personalInfo', label: 'Personal Info', icon: '👤' },
           { id: 'experience', label: 'Experience', icon: '💼' },
           { id: 'skills', label: 'Skills', icon: '🎯' },
-          { id: 'achievements', label: 'Achievements', icon: '🏆' }
+          { id: 'achievements', label: 'Achievements', icon: '🏆' },
         ];
 
         const handleInputChange = (field, value) => {
@@ -77,7 +82,6 @@
 
         return (
           <div className="flex bg-white rounded-lg shadow-lg">
-            {/* Sidebar */}
             <div className="w-64 border-r border-gray-200 p-6">
               <nav className="space-y-2">
                 {sections.map((section) => (
@@ -95,7 +99,6 @@
               </nav>
             </div>
 
-            {/* Content Area */}
             <div className="flex-1 p-6">
               {activeSection === 'personalInfo' && (
                 <div className="space-y-4">
@@ -200,7 +203,6 @@
       };
 
       const App = () => {
-        const [currentView, setCurrentView] = useState('organizer');
         const [data, setData] = useState({
           personalInfo: { name: '', email: '', phoneNumber: '' },
           experience: [],
@@ -208,7 +210,7 @@
           achievements: [],
         });
 
-        return <ResumeOrganizer data={data} setData={setData} setCurrentView={setCurrentView} />;
+        return <ResumeOrganizer data={data} setData={setData} />;
       };
 
       ReactDOM.render(<App />, document.getElementById('root'));
