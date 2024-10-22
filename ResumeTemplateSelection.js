@@ -1,10 +1,10 @@
 import React from 'react';
 
-const ResumeTemplateSelection = ({ setCurrentView }) => {
+const ResumeTemplateSelection: React.FC<ResumeTemplateSelectionProps> = ({ setCurrentView }) => {
   const templates = [
     { id: 'modern', name: 'Modern', icon: '🎨' },
     { id: 'classic', name: 'Classic', icon: '📄' },
-    { id: 'minimal', name: 'Minimal', icon: '✨' }
+    { id: 'minimal', name: 'Minimal', icon: '✨' },
   ];
 
   return (
