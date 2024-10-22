@@ -4,7 +4,7 @@ const ResumeTemplateSelection = ({ setCurrentView }) => {
   const templates = [
     { id: 'modern', name: 'Modern', icon: '🎨' },
     { id: 'classic', name: 'Classic', icon: '📄' },
-    { id: 'minimal', name: 'Minimal', icon: '✨' }
+    { id: 'minimal', name: 'Minimal', icon: '✨' },
   ];
 
   return (
