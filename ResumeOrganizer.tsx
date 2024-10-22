@@ -1,23 +1,5 @@
 import React, { useState } from 'react';
-
-interface PersonalInfo {
-  name: string;
-  email: string;
-  phoneNumber: string;
-}
-
-interface Experience {
-  company: string;
-  role: string;
-  duration: string;
-}
-
-interface Data {
-  personalInfo: PersonalInfo;
-  experience: Experience[];
-  skills: string[];
-  achievements: string[];
-}
+import { Data, PersonalInfo } from '../types';
 
 interface ResumeOrganizerProps {
   data: Data;
