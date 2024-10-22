@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ResumePreview = ({ data, setCurrentView }) => {
+const ResumePreview: React.FC<ResumePreviewProps> = ({ data, setCurrentView }) => {
   return (
     <div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
       {/* Personal Info */}
