@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import ResumeOrganizer from './components/ResumeOrganizer';
 import ResumePreview from './components/ResumePreview';
 import ResumeTemplateSelection from './components/ResumeTemplateSelection';
+import { Data } from './types';
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<string>('organizer');
-  const [data, setData] = useState({
+  const [data, setData] = useState<Data>({
     personalInfo: { name: '', email: '', phoneNumber: '' },
     experience: [],
     skills: [],
@@ -54,9 +55,7 @@ const App: React.FC = () => {
           </div>
         </div>
       </nav>
-      <main className="max-w-7xl mx-auto px-4">
-        {renderComponent()}
-      </main>
+      <main className="max-w-7xl mx-auto px-4">{renderComponent()}</main>
     </div>
   );
 };
