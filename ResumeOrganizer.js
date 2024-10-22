@@ -1,37 +1,37 @@
 import React, { useState } from 'react';
 
-const ResumeOrganizer = ({ data, setData, setCurrentView }) => {
-  const [activeSection, setActiveSection] = useState('personalInfo');
+const ResumeOrganizer: React.FC<ResumeOrganizerProps> = ({ data, setData, setCurrentView }) => {
+  const [activeSection, setActiveSection] = useState<string>('personalInfo');
 
   const sections = [
     { id: 'personalInfo', label: 'Personal Info', icon: '👤' },
     { id: 'experience', label: 'Experience', icon: '💼' },
     { id: 'skills', label: 'Skills', icon: '🎯' },
-    { id: 'achievements', label: 'Achievements', icon: '🏆' }
+    { id: 'achievements', label: 'Achievements', icon: '🏆' },
   ];
 
-  const handleInputChange = (field, value) => {
-    setData(prev => ({
+  const handleInputChange = (field: keyof PersonalInfo, value: string) => {
+    setData((prev) => ({
       ...prev,
       personalInfo: {
         ...prev.personalInfo,
-        [field]: value
-      }
+        [field]: value,
+      },
     }));
   };
 
   const addExperience = () => {
-    setData(prev => ({
+    setData((prev) => ({
       ...prev,
-      experience: [...prev.experience, { company: '', role: '', duration: '' }]
+      experience: [...prev.experience, { company: '', role: '', duration: '' }],
     }));
   };
 
-  const addItem = (section, value) => {
+  const addItem = (section: keyof Data, value: string) => {
     if (value && !data[section].includes(value)) {
-      setData(prev => ({
+      setData((prev) => ({
         ...prev,
-        [section]: [...prev[section], value]
+        [section]: [...prev[section], value],
       }));
     }
   };
@@ -41,7 +41,7 @@ const ResumeOrganizer = ({ data, setData, setCurrentView }) => {
       {/* Sidebar */}
       <div className="w-64 border-r border-gray-200 p-6">
         <nav className="space-y-2">
-          {sections.map(section => (
+          {sections.map((section) => (
             <button
               key={section.id}
               onClick={() => setActiveSection(section.id)}
@@ -97,7 +97,7 @@ const ResumeOrganizer = ({ data, setData, setCurrentView }) => {
                   onChange={(e) => {
                     const newExperience = [...data.experience];
                     newExperience[index].company = e.target.value;
-                    setData(prev => ({ ...prev, experience: newExperience }));
+                    setData((prev) => ({ ...prev, experience: newExperience }));
                   }}
                   className="w-full p-2 border rounded mb-2"
                 />
@@ -108,7 +108,7 @@ const ResumeOrganizer = ({ data, setData, setCurrentView }) => {
                   onChange={(e) => {
                     const newExperience = [...data.experience];
                     newExperience[index].role = e.target.value;
-                    setData(prev => ({ ...prev, experience: newExperience }));
+                    setData((prev) => ({ ...prev, experience: newExperience }));
                   }}
                   className="w-full p-2 border rounded mb-2"
                 />
@@ -119,7 +119,7 @@ const ResumeOrganizer = ({ data, setData, setCurrentView }) => {
                   onChange={(e) => {
                     const newExperience = [...data.experience];
                     newExperience[index].duration = e.target.value;
-                    setData(prev => ({ ...prev, experience: newExperience }));
+                    setData((prev) => ({ ...prev, experience: newExperience }));
                   }}
                   className="w-full p-2 border rounded"
                 />
