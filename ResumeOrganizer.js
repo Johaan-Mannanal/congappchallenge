@@ -7,45 +7,48 @@ const ResumeOrganizer = ({ data, setData, setCurrentView }) => {
     { id: 'personalInfo', label: 'Personal Info', icon: '👤' },
     { id: 'experience', label: 'Experience', icon: '💼' },
     { id: 'skills', label: 'Skills', icon: '🎯' },
-    { id: 'achievements', label: 'Achievements', icon: '🏆' }
+    { id: 'achievements', label: 'Achievements', icon: '🏆' },
   ];
 
   const handleInputChange = (field, value) => {
-    setData(prev => ({
+    setData((prev) => ({
       ...prev,
       personalInfo: {
         ...prev.personalInfo,
-        [field]: value
-      }
+        [field]: value,
+      },
     }));
   };
 
   const addExperience = () => {
-    setData(prev => ({
+    setData((prev) => ({
       ...prev,
-      experience: [...prev.experience, { company: '', role: '', duration: '' }]
+      experience: [...prev.experience, { company: '', role: '', duration: '' }],
     }));
   };
 
   const addItem = (section, value) => {
     if (value && !data[section].includes(value)) {
-      setData(prev => ({
+      setData((prev) => ({
         ...prev,
-        [section]: [...prev[section], value]
+        [section]: [...prev[section], value],
       }));
     }
   };
 
   return (
     <div className="flex bg-white rounded-lg shadow-lg">
+      {/* Sidebar */}
       <div className="w-64 border-r border-gray-200 p-6">
         <nav className="space-y-2">
-          {sections.map(section => (
+          {sections.map((section) => (
             <button
               key={section.id}
               onClick={() => setActiveSection(section.id)}
               className={`flex items-center w-full p-3 rounded-lg ${
-                activeSection === section.id ? 'bg-blue-50 text-blue-600' : 'hover:bg-gray-50'
+                activeSection === section.id
+                  ? 'bg-blue-50 text-blue-600'
+                  : 'hover:bg-gray-50'
               }`}
             >
               <span className="mr-2">{section.icon}</span>
@@ -55,6 +58,7 @@ const ResumeOrganizer = ({ data, setData, setCurrentView }) => {
         </nav>
       </div>
 
+      {/* Content Area */}
       <div className="flex-1 p-6">
         {activeSection === 'personalInfo' && (
           <div className="space-y-4">
@@ -95,7 +99,7 @@ const ResumeOrganizer = ({ data, setData, setCurrentView }) => {
                   onChange={(e) => {
                     const newExperience = [...data.experience];
                     newExperience[index].company = e.target.value;
-                    setData(prev => ({ ...prev, experience: newExperience }));
+                    setData((prev) => ({ ...prev, experience: newExperience }));
                   }}
                   className="w-full p-2 border rounded mb-2"
                 />
@@ -106,7 +110,7 @@ const ResumeOrganizer = ({ data, setData, setCurrentView }) => {
                   onChange={(e) => {
                     const newExperience = [...data.experience];
                     newExperience[index].role = e.target.value;
-                    setData(prev => ({ ...prev, experience: newExperience }));
+                    setData((prev) => ({ ...prev, experience: newExperience }));
                   }}
                   className="w-full p-2 border rounded mb-2"
                 />
@@ -117,7 +121,7 @@ const ResumeOrganizer = ({ data, setData, setCurrentView }) => {
                   onChange={(e) => {
                     const newExperience = [...data.experience];
                     newExperience[index].duration = e.target.value;
-                    setData(prev => ({ ...prev, experience: newExperience }));
+                    setData((prev) => ({ ...prev, experience: newExperience }));
                   }}
                   className="w-full p-2 border rounded"
                 />
@@ -134,14 +138,20 @@ const ResumeOrganizer = ({ data, setData, setCurrentView }) => {
 
         {(activeSection === 'skills' || activeSection === 'achievements') && (
           <div className="space-y-4">
-            <h2 className="text-xl font-bold">{activeSection === 'skills' ? 'Skills' : 'Achievements'}</h2>
+            <h2 className="text-xl font-bold">
+              {activeSection === 'skills' ? 'Skills' : 'Achievements'}
+            </h2>
             <div className="space-y-2">
               {data[activeSection].map((item, index) => (
-                <div key={index} className="p-2 bg-gray-50 rounded">{item}</div>
+                <div key={index} className="p-2 bg-gray-50 rounded">
+                  {item}
+                </div>
               ))}
               <input
                 type="text"
-                placeholder={`Add new ${activeSection === 'skills' ? 'skill' : 'achievement'}`}
+                placeholder={`Add new ${
+                  activeSection === 'skills' ? 'skill' : 'achievement'
+                }`}
                 onKeyPress={(e) => {
                   if (e.key === 'Enter') {
                     addItem(activeSection, e.target.value);
