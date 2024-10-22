@@ -1,5 +1,7 @@
+import React, { useState } from 'react';
+
 const ResumeOrganizer = ({ data, setData, setCurrentView }) => {
-  const [activeSection, setActiveSection] = React.useState('personalInfo');
+  const [activeSection, setActiveSection] = useState('personalInfo');
 
   const sections = [
     { id: 'personalInfo', label: 'Personal Info', icon: '👤' },
@@ -36,7 +38,6 @@ const ResumeOrganizer = ({ data, setData, setCurrentView }) => {
 
   return (
     <div className="flex bg-white rounded-lg shadow-lg">
-      {/* Sidebar */}
       <div className="w-64 border-r border-gray-200 p-6">
         <nav className="space-y-2">
           {sections.map(section => (
@@ -54,7 +55,6 @@ const ResumeOrganizer = ({ data, setData, setCurrentView }) => {
         </nav>
       </div>
 
-      {/* Content Area */}
       <div className="flex-1 p-6">
         {activeSection === 'personalInfo' && (
           <div className="space-y-4">
@@ -88,7 +88,39 @@ const ResumeOrganizer = ({ data, setData, setCurrentView }) => {
             <h2 className="text-xl font-bold">Experience</h2>
             {data.experience.map((exp, index) => (
               <div key={index} className="p-4 border rounded">
-                {/* Experience fields */}
+                <input
+                  type="text"
+                  placeholder="Company"
+                  value={exp.company}
+                  onChange={(e) => {
+                    const newExperience = [...data.experience];
+                    newExperience[index].company = e.target.value;
+                    setData(prev => ({ ...prev, experience: newExperience }));
+                  }}
+                  className="w-full p-2 border rounded mb-2"
+                />
+                <input
+                  type="text"
+                  placeholder="Role"
+                  value={exp.role}
+                  onChange={(e) => {
+                    const newExperience = [...data.experience];
+                    newExperience[index].role = e.target.value;
+                    setData(prev => ({ ...prev, experience: newExperience }));
+                  }}
+                  className="w-full p-2 border rounded mb-2"
+                />
+                <input
+                  type="text"
+                  placeholder="Duration"
+                  value={exp.duration}
+                  onChange={(e) => {
+                    const newExperience = [...data.experience];
+                    newExperience[index].duration = e.target.value;
+                    setData(prev => ({ ...prev, experience: newExperience }));
+                  }}
+                  className="w-full p-2 border rounded"
+                />
               </div>
             ))}
             <button
@@ -125,3 +157,5 @@ const ResumeOrganizer = ({ data, setData, setCurrentView }) => {
     </div>
   );
 };
+
+export default ResumeOrganizer;
