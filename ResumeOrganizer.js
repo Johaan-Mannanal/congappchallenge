@@ -38,7 +38,6 @@ const ResumeOrganizer = ({ data, setData, setCurrentView }) => {
 
   return (
     <div className="flex bg-white rounded-lg shadow-lg">
-      {/* Sidebar */}
       <div className="w-64 border-r border-gray-200 p-6">
         <nav className="space-y-2">
           {sections.map((section) => (
@@ -46,9 +45,7 @@ const ResumeOrganizer = ({ data, setData, setCurrentView }) => {
               key={section.id}
               onClick={() => setActiveSection(section.id)}
               className={`flex items-center w-full p-3 rounded-lg ${
-                activeSection === section.id
-                  ? 'bg-blue-50 text-blue-600'
-                  : 'hover:bg-gray-50'
+                activeSection === section.id ? 'bg-blue-50 text-blue-600' : 'hover:bg-gray-50'
               }`}
             >
               <span className="mr-2">{section.icon}</span>
@@ -58,7 +55,6 @@ const ResumeOrganizer = ({ data, setData, setCurrentView }) => {
         </nav>
       </div>
 
-      {/* Content Area */}
       <div className="flex-1 p-6">
         {activeSection === 'personalInfo' && (
           <div className="space-y-4">
@@ -138,20 +134,14 @@ const ResumeOrganizer = ({ data, setData, setCurrentView }) => {
 
         {(activeSection === 'skills' || activeSection === 'achievements') && (
           <div className="space-y-4">
-            <h2 className="text-xl font-bold">
-              {activeSection === 'skills' ? 'Skills' : 'Achievements'}
-            </h2>
+            <h2 className="text-xl font-bold">{activeSection === 'skills' ? 'Skills' : 'Achievements'}</h2>
             <div className="space-y-2">
               {data[activeSection].map((item, index) => (
-                <div key={index} className="p-2 bg-gray-50 rounded">
-                  {item}
-                </div>
+                <div key={index} className="p-2 bg-gray-50 rounded">{item}</div>
               ))}
               <input
                 type="text"
-                placeholder={`Add new ${
-                  activeSection === 'skills' ? 'skill' : 'achievement'
-                }`}
+                placeholder={`Add new ${activeSection === 'skills' ? 'skill' : 'achievement'}`}
                 onKeyPress={(e) => {
                   if (e.key === 'Enter') {
                     addItem(activeSection, e.target.value);
