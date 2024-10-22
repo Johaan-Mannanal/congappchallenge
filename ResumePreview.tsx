@@ -1,19 +1,5 @@
 import React from 'react';
-
-interface Data {
-  personalInfo: {
-    name: string;
-    email: string;
-    phoneNumber: string;
-  };
-  experience: {
-    company: string;
-    role: string;
-    duration: string;
-  }[];
-  skills: string[];
-  achievements: string[];
-}
+import { Data } from '../types';
 
 interface ResumePreviewProps {
   data: Data;
