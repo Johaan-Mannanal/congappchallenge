@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import ResumeOrganizer from './ResumeOrganizer';
-import ResumePreview from './ResumePreview';
-import ResumeTemplateSelection from './ResumeTemplateSelection';
+import ResumeOrganizer from './components/ResumeOrganizer';
+import ResumePreview from './components/ResumePreview';
+import ResumeTemplateSelection from './components/ResumeTemplateSelection';
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<string>('organizer');
-  const [data, setData] = useState<Data>({
+  const [data, setData] = useState({
     personalInfo: { name: '', email: '', phoneNumber: '' },
     experience: [],
     skills: [],
