@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-
 const ResumeOrganizer = ({ data, setData, setCurrentView }) => {
-  const [activeSection, setActiveSection] = useState('personalInfo');
+  const [activeSection, setActiveSection] = React.useState('personalInfo');
 
   const sections = [
     { id: 'personalInfo', label: 'Personal Info', icon: '👤' },
@@ -157,5 +155,3 @@ const ResumeOrganizer = ({ data, setData, setCurrentView }) => {
     </div>
   );
 };
-
-export default ResumeOrganizer;
