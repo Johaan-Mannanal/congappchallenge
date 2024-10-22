@@ -4,46 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Resume Builder</title>
+    <title>React Test</title>
 
     <!-- React and ReactDOM via CDN -->
     <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
 
-    <!-- Babel to transpile JSX in the browser -->
+    <!-- Babel for JSX transpiling -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-    <!-- Add custom styles here -->
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f0f4f8;
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      .container {
-        width: 100%;
-        max-width: 900px;
-        margin: 50px auto;
-        padding: 20px;
-        background-color: white;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-      }
-      h1 {
-        color: #333;
-      }
-    </style>
   </head>
-
   <body>
-    <div id="root" class="container"></div>
+    <div id="root"></div>
 
-    <!-- Load React Components -->
-    <script type="text/babel" src="../src/app.js"></script>
-    <script type="text/babel" src="../src/resumeOrganizer.js"></script>
-    <script type="text/babel" src="../src/resumePreview.js"></script>
-    <script type="text/babel" src="../src/resumeTemplateSelection.js"></script>
+    <!-- Inline Test React Code -->
+    <script type="text/babel">
+      const App = () => {
+        return <h1>Hello from React!</h1>;
+      };
+
+      ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
   </body>
 </html>
