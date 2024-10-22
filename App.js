@@ -9,7 +9,7 @@ const App = () => {
     personalInfo: { name: '', email: '', phoneNumber: '' },
     experience: [],
     skills: [],
-    achievements: []
+    achievements: [],
   });
 
   const renderComponent = () => {
